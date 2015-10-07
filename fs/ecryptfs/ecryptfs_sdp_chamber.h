@@ -11,14 +11,13 @@
 #include "ecryptfs_kernel.h"
 
 int add_chamber_directory(struct ecryptfs_mount_crypt_stat *mount_crypt_stat,
-		int engine_id, const unsigned char *path);
+		char *path);
 void del_chamber_directory(struct ecryptfs_mount_crypt_stat *mount_crypt_stat,
-        const unsigned char *path);
+		char *path);
 int is_chamber_directory(struct ecryptfs_mount_crypt_stat *mount_crypt_stat,
-		const unsigned char *path, int *engineid);
+		char *path);
 
-void set_chamber_flag(int engineid, struct inode *inode);
-void clr_chamber_flag(struct inode *inode);
+void set_chamber_flag(struct inode *inode);
 
 #define IS_UNDER_ROOT(dentry) (dentry->d_parent->d_inode == dentry->d_sb->s_root->d_inode)
 #define IS_CHAMBER_DENTRY(dentry) (ecryptfs_inode_to_private(dentry->d_inode)->crypt_stat.flags & ECRYPTFS_SDP_IS_CHAMBER_DIR)

@@ -420,15 +420,6 @@ int get_dsm_onoff_status(void){
 	return param[PARAM_ONOFF];
 }
 
-static int maxdsm_check_param_size(ssize_t count)
-{
-	int param_size;
-
-	param_size =  sizeof(int) * PARAM_DSM_MAX;
-
-	return count > param_size ? -EOVERFLOW : 0;
-}
-
 static int maxdsm_open(struct inode *inode, struct file *filep)
 {
 	return 0;
@@ -463,9 +454,6 @@ static ssize_t maxdsm_write(struct file *filep, const char __user *buf,
 {
 	int x, rc;
 	uint32_t filter_set;
-
-	if (maxdsm_check_param_size(count))
-		return count;
 
 	mutex_lock(&dsm_lock);
 

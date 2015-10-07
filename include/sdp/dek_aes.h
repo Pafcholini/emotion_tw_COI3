@@ -5,9 +5,10 @@
 #include <linux/types.h>
 #include <linux/crypto.h>
 #include <linux/scatterlist.h>
-#include <sdp/dek_aes.h>
 
-int dek_aes_encrypt(kek_t *kek, char *src, char *dst, int len);
-int dek_aes_decrypt(kek_t *kek, char *src, char *dst, int len);
+struct crypto_blkcipher *dek_aes_key_setup(unsigned char *key, int len);
+void dek_aes_key_free(struct crypto_blkcipher *sdp_tfm);
+int dek_aes_encrypt(struct crypto_blkcipher *sdp_tfm, char *src, char *dst, int len);
+int dek_aes_decrypt(struct crypto_blkcipher *sdp_tfm, char *src, char *dst, int len);
 
 #endif
